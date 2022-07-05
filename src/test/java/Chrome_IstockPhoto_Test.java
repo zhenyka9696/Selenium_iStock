@@ -5,6 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import java.awt.*;
+
+import static java.awt.event.KeyEvent.VK_CONTROL;
+import static java.awt.event.KeyEvent.VK_V;
+
 /*Если какие-то тесты не проходятся, то лучше отключать некоторые тесты.
 *Бывает работают все вместе, а порой всё идёт совсем непредсказуемо.
 * Дополнено: тесты стали проходится более стабильно, даже не отключая ни один из них*/
@@ -134,13 +140,12 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/EULegal",driver.getCurre
         Thread.sleep(1000);
       driver.get(baseUrl);
       WebElement promo= driver.findElement(By.xpath("//*[@id='footer']/div/div[2]/ul/li[3]/a"));
-        //*[@id="footer"]/div/div[2]/ul/li[3]/a
-        Thread.sleep(700);
+Thread.sleep(700);
       promo.click();
 Assertions.assertTrue(driver.getTitle().toUpperCase().contains("Промокоды".toUpperCase()));
-        Thread.sleep(7);
+        Thread.sleep(500);
 WebElement price= driver.findElement(By.xpath("//*[@id='promo-code']/section/div/div[3]/div/a"));
-        Thread.sleep(7);
+        Thread.sleep(2000);
 price.click();
         Thread.sleep(1000);
 Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD%D1%8B-%D0%B8-%D1%86%D0%B5%D0%BD%D1%8B",driver.getCurrentUrl());
@@ -176,9 +181,9 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
         filtersB.click();
         Thread.sleep(600);
         WebElement best= driver.findElement(By.xpath("/html/body/div[2]/section/div/main/div/div/div[2]/div[1]/div/div/section[1]/li[1]/input"));
-        Thread.sleep(18);
+        Thread.sleep(1300);
         best.click();
-        Thread.sleep(18);
+        Thread.sleep(1200);
         WebElement checkboxC831V= driver.findElement(By.xpath("/html/body/div[2]/section/div/main/div/div/div[2]/div[1]/div/div/section[2]/div/span"));
         Thread.sleep(18);
         checkboxC831V.click();
@@ -205,7 +210,7 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
   }
 
   @Test
-    //@Disabled
+    @Disabled
     @Order(12)
     //48
     public void FationAndBeauty() throws InterruptedException{
@@ -213,9 +218,9 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
       driver.get(baseUrl);
       Thread.sleep(7);
       WebElement fationAndBeauty= driver.findElement(By.xpath("//*[@id='category-listing']/div[2]/div[1]/ul/li[2]/a"));
-      Thread.sleep(65);
+      Thread.sleep(1000);
       fationAndBeauty.click();
-      Thread.sleep(7);
+      Thread.sleep(1500);
       Assertions.assertEquals("https://www.istockphoto.com/ru/%D1%81%D1%82%D0%BE%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%B8/%D0%BC%D0%BE%D0%B4%D0%B0-%D0%B8-%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B0",driver.getCurrentUrl());
       Thread.sleep(7);
       driver.navigate().back();
@@ -259,7 +264,7 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
       driver.get(baseUrl);
        Thread.sleep(800);
       WebElement feelingsAndMood= driver.findElement(By.xpath("//*[@id='category-listing']/div[2]/div[1]/ul/li[4]/a"));
-       Thread.sleep(7);
+       Thread.sleep(1800);
        feelingsAndMood.click();
        Thread.sleep(7);
 Assertions.assertEquals
@@ -267,42 +272,95 @@ Assertions.assertEquals
         driver.getCurrentUrl());
    }
 
-    /*
-    @Test
+   @Test
     @Disabled
-    @Order(100)
-    public void signUp() {
-        //*[@id="register_email"]
-        //*[@id="register_password"]
-        //*[@id="register_password_confirmation"]
-        WebElement email = driver.findElement(By.id("register_email"));
-        email.sendKeys(generate());
-        WebElement password = driver.findElement(By.id("register_password"));
-        password.sendKeys("abc1234567890");
-        WebElement passwordConfirm = driver.findElement(By.id("register_password_confirmation"));
-        passwordConfirm.sendKeys("abc1234567890");
-        Select countries = new Select(driver.findElement(By.id
-                ("register_country_code")));
-        countries.selectByVisibleText("Российская Федерация");
-        WebElement checkbox = driver.findElement(By.id("checkbox"));
-        checkbox.click();
-        WebElement button = driver.findElement(By.xpath("//*[@id='register-button']"));
-        button.click();
-    }
-*/
+    @Order(16)
+    public void signUp() throws InterruptedException, AWTException {
+              Thread.sleep(1000);
+       driver.get("https://10minutemail.net/?lang=ru");
+       Thread.sleep(10000);
+WebElement muinuteMail10= driver.findElement(By.id("copy-button"));
+       Thread.sleep(20);
+muinuteMail10.click();
+       Thread.sleep(20);
+       driver.navigate().back();
+       Thread.sleep(20);
+WebElement join= driver.findElement(By.xpath
+        ("//*[@id='site-header']/div[2]/nav[3]/div/ul/li[7]/a"));
+       Thread.sleep(20);
+       join.click();
+       Thread.sleep(20);
+       WebElement email=driver.findElement(By.id("register_email"));
+       Thread.sleep(20);
+       email.click();
+       Robot rob=new Robot();
+       rob.keyPress(VK_CONTROL);
+       rob.keyPress(VK_V);
+       rob.keyRelease(VK_CONTROL);
+       rob.keyRelease(VK_V);
+       Thread.sleep(20);
+       WebElement password=driver.findElement(By.id("register_password"));
+       Thread.sleep(20);
+       password.sendKeys("1234567890A");
+       Thread.sleep(20);
+WebElement passwordConfirmation=driver.findElement(By.id("register_password_confirmation"));
+Thread.sleep(20);
+passwordConfirmation.sendKeys("1234567890A");
+Thread.sleep(20);
+Select country=new Select(driver.findElement(By.id("register_country_code")));
+Thread.sleep(20);
+country.selectByVisibleText("Romania");
+       Thread.sleep(20);
+       WebElement checkbox= driver.findElement(By.id("checkbox"));
+       checkbox.click();
+       Thread.sleep(20);
+       WebElement registerButton=driver.findElement((By.id("register-button")));
+       Thread.sleep(20);
+       registerButton.click();
+       }
 
-   /* @Test
-    @Disabled
-    public void search(){
-        String text="text";
-        //*[@id="hero--video-first"]/div[2]/div/div/div/div/div/div/div/div[1]/div[1]/form/input
-        WebElement input= driver.findElement(By.xpath("//SearchBox-istock-module__input___MBrbS[@name='phrase']"));
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        input.sendKeys(text);
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        input.sendKeys(Keys.ENTER);
-        //проверка, что поиск состоялся
-        Assertions.assertTrue(driver.getCurrentUrl().contains("google.com/search"));
-    }*/
+       @Test
+    //@Disabled
+    @Order(17)
+               public void signIn() throws InterruptedException {
+           Thread.sleep(1100);
+           driver.get(baseUrl);
+           Thread.sleep(1000);
+           WebElement account=driver.findElement(By.xpath("//*[@id='site-header']/div[2]/nav[3]/div/ul/li[6]/a"));
+           Thread.sleep(770);
+           account.click();
+           Thread.sleep(1100);
+           WebElement email= driver.findElement(By.id("new_session_username"));
+           Thread.sleep(10);
+           email.sendKeys("epv62185@xcoxc.com");
+           Thread.sleep(10);
+           WebElement password= driver.findElement(By.id("new_session_password"));
+           Thread.sleep(10);
+           password.sendKeys("1234567890A");
+           Thread.sleep(10);
+           WebElement entry= driver.findElement(By.id("sign_in"));
+           Thread.sleep(10);
+           entry.click();
+       }
+
+       @Test
+//    @Disabled
+@Order(18)
+    public void signOut() throws InterruptedException{
+           Thread.sleep(500);
+           WebElement displayName= driver.findElement(By.xpath("//*[@id='site-header']/div[2]/nav[3]/div/ul/li[6]/span[1]"));
+           Thread.sleep(500);
+           displayName.click();
+           Thread.sleep(800);
+           WebElement basic= driver.findElement(By.xpath("//*[@id='site-header']/div[2]/div[1]/ul[2]/li[1]/a/div"));
+           Thread.sleep(800);
+           basic.click();
+           Thread.sleep(300);
+           driver.navigate().back();
+           Thread.sleep(5);
+           WebElement exit= driver.findElement(By.id("hypSignOut"));
+           exit.click();
+       }
+
 }
 
