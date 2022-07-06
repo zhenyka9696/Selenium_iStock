@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
 import java.awt.*;
 
 import static java.awt.event.KeyEvent.VK_CONTROL;
@@ -31,7 +30,7 @@ protected final String baseUrl="https://www.istockphoto.com/ru";//75
       driver.manage().window().maximize();
       Assertions.assertEquals(baseUrl,driver.getCurrentUrl());
       }
-//Зависает частенько после второго и третьего теста
+
     @Test
     //@Disabled
     @Order(2)
@@ -127,7 +126,6 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/EULegal",driver.getCurre
         WebElement problemDescription= driver.findElement(By.id("customer_support_comments"));
         Thread.sleep(1200);
         problemDescription.sendKeys("Помощь не требуется. Спасибо за внимание!");
-//do {}
     }
     //Ещё промокоды планировал, далее и реализуем.
     //25//Это люди
@@ -210,7 +208,7 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
   }
 
   @Test
-    @Disabled
+    //@Disabled
     @Order(12)
     //48
     public void FationAndBeauty() throws InterruptedException{
@@ -361,6 +359,5 @@ country.selectByVisibleText("Romania");
            WebElement exit= driver.findElement(By.id("hypSignOut"));
            exit.click();
        }
-
 }
 
