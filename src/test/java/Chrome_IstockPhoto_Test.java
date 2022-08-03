@@ -123,7 +123,7 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/EULegal",driver.getCurre
         Select optionsSummary=new Select(driver.findElement(By.id("problem-options")));
         Thread.sleep(1700);
         optionsSummary.selectByVisibleText("Другое");
-        WebElement problemDescription= driver.findElement(By.id("customer_support_comments"));
+        WebElement problemDescription= driver.findElement(By.id("customer_support_comments"));//id не поменялся, элемент находит, все работает, но IDEA находит ошибку
         Thread.sleep(1200);
         problemDescription.sendKeys("Помощь не требуется. Спасибо за внимание!");
     }
@@ -138,10 +138,10 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/EULegal",driver.getCurre
         Thread.sleep(1000);
       driver.get(baseUrl);
       WebElement promo= driver.findElement(By.xpath("//*[@id='footer']/div/div[2]/ul/li[3]/a"));
-Thread.sleep(700);
+Thread.sleep(1500);
       promo.click();
 Assertions.assertTrue(driver.getTitle().toUpperCase().contains("Промокоды".toUpperCase()));
-        Thread.sleep(500);
+        Thread.sleep(1500);
 WebElement price= driver.findElement(By.xpath("//*[@id='promo-code']/section/div/div[3]/div/a"));
         Thread.sleep(2000);
 price.click();
@@ -157,8 +157,12 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
       Thread.sleep(1000);
         driver.get(baseUrl);
         WebElement people= driver.findElement(By.xpath("//*[@id='category-tiles']/div[1]/div[1]/div/a[1]"));
-        Thread.sleep(1400);
-        people.click();
+        Thread.sleep(2000);
+        //people.isDisplayed();не работает
+        //people.isEnabled();не работает
+        //people.isSelected();//не работает
+        people.click();//03.08.2022
+        Thread.sleep(2000);
         Assertions.assertTrue(driver.getTitle().toUpperCase().contains("Люди".toUpperCase()));
     }
 
@@ -166,13 +170,13 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
     //@Disabled
     @Order(10)
     public void innerSearch() throws InterruptedException{
-        Thread.sleep(1800);
+        Thread.sleep(3600);
         WebElement search= driver.findElement(By.xpath("/html/body/div[2]/section/div/main/div/div/div[1]/div/div/div/div/div[1]/div[1]/form/input"));
-        Thread.sleep(18);
+        Thread.sleep(3600);
         search.sendKeys(" и другое");
-        Thread.sleep(18);
+        Thread.sleep(1800);
         search.sendKeys(Keys.ENTER);
-        Thread.sleep(18);
+        Thread.sleep(1800);
         WebElement filtersB= driver.findElement(By.xpath("/html/body/div[2]/section/div/main/div/div/div[1]/nav/div"));
         Thread.sleep(1000);
         //filtersB.isDisplayed();
@@ -216,9 +220,9 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
       driver.get(baseUrl);
       Thread.sleep(7);
       WebElement fationAndBeauty= driver.findElement(By.xpath("//*[@id='category-listing']/div[2]/div[1]/ul/li[2]/a"));
-      Thread.sleep(1000);
+      Thread.sleep(3000);
       fationAndBeauty.click();
-      Thread.sleep(1500);
+      Thread.sleep(3000);
       Assertions.assertEquals("https://www.istockphoto.com/ru/%D1%81%D1%82%D0%BE%D0%BA%D0%BE%D0%B2%D1%8B%D0%B5-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%B8/%D0%BC%D0%BE%D0%B4%D0%B0-%D0%B8-%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B0",driver.getCurrentUrl());
       Thread.sleep(7);
       driver.navigate().back();
@@ -234,11 +238,11 @@ Assertions.assertEquals("https://www.istockphoto.com/ru/%D0%BF%D0%BB%D0%B0%D0%BD
           driver.get(baseUrl);
           Thread.sleep(1900);
           WebElement phrase= driver.findElement(By.xpath("//*[@id='hero--video-first']/div[2]/div/div/div/div/div/div/div/div[1]/div[1]/form/input"));
-          Thread.sleep(19);
+          Thread.sleep(1900);
           phrase.sendKeys("Иллюминаты");
-          Thread.sleep(19);
+          Thread.sleep(1900);
           phrase.sendKeys(Keys.ENTER);
-          Thread.sleep(19);
+          Thread.sleep(1900);
           Assertions.assertTrue(driver.getTitle().toUpperCase().contains("Иллюминаты".toUpperCase()));
       }
 
@@ -320,12 +324,14 @@ country.selectByVisibleText("Romania");
        @Test
     //@Disabled
     @Order(17)
-               public void signIn() throws InterruptedException {
+           public void signIn() throws InterruptedException {
            Thread.sleep(1100);
            driver.get(baseUrl);
-           Thread.sleep(1000);
-           WebElement account=driver.findElement(By.xpath("//*[@id='site-header']/div[2]/nav[3]/div/ul/li[6]/a"));
-           Thread.sleep(770);
+           Thread.sleep(2000);
+           WebElement account=driver.findElement(By.xpath("//*[@id='header-wrapper']/div/div/header/nav[2]/ul/span[2]/li[1]/a"));
+           //*[@id='site-header']/div[2]/nav[3]/div/ul/li[6]/a
+           //раньше был тот путь
+           Thread.sleep(2000);
            account.click();
            Thread.sleep(1100);
            WebElement email= driver.findElement(By.id("new_session_username"));
@@ -353,10 +359,15 @@ country.selectByVisibleText("Romania");
            WebElement basic= driver.findElement(By.xpath("//*[@id='site-header']/div[2]/div[1]/ul[2]/li[1]/a/div"));
            Thread.sleep(800);
            basic.click();
-           Thread.sleep(300);
-           driver.navigate().back();
-           Thread.sleep(5);
+           Thread.sleep(600);
+           driver.get(baseUrl);
+           Thread.sleep(2400);
+           WebElement displayName0= driver.findElement(By.xpath("//*[@id='site-header']/div[2]/nav[3]/div/ul/li[6]/span[1]"));
+           Thread.sleep(2000);
+           displayName0.click();
+           Thread.sleep(2000);
            WebElement exit= driver.findElement(By.id("hypSignOut"));
+           Thread.sleep(500);
            exit.click();
        }
 }
